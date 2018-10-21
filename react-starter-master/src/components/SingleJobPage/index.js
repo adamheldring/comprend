@@ -11,8 +11,8 @@ class SingleJob extends React.Component {
     employees: [],
     randomEmployeeIndex: 0,
     jobIndex: "",
-    nextJob: "",
-    previousJob: ""
+    nextJob: 0,
+    previousJob: 0
   }
 
   getJobInfo = () => {
@@ -37,25 +37,28 @@ class SingleJob extends React.Component {
       .then(jobs => {
         this.setState({
           jobList: jobs
-        })
-        this.state.jobList.forEach(item => {
-          if (item.id === pathUrl) {
-            this.setState({
-              jobIndex: this.state.jobList.indexOf(item)
-            })
-          }
-        })
-        const { jobIndex, jobList } = this.state
-        console.log("jobList", jobList)
-        console.log("jobIndex", jobIndex)
-
-        const nextJobId = jobList[jobIndex + 1].id
-        this.setState({
-          nextJob: nextJobId
-        })
-        const previousJobId = jobList[jobIndex - 1].id
-        this.setState({
-          previousJob: previousJobId
+        }, () => {
+          this.state.jobList.forEach(item => {
+            if (item.id === pathUrl) {
+              this.setState({
+                jobIndex: this.state.jobList.indexOf(item)
+              }, () => {
+                const { jobIndex, jobList } = this.state
+                if (jobIndex != (jobList.length - 1)) {
+                  const nextJobId = jobList[jobIndex + 1].id
+                  this.setState({
+                    nextJob: nextJobId
+                  })
+                }
+                if (jobIndex != 0) {
+                  const previousJobId = jobList[jobIndex - 1].id
+                  this.setState({
+                    previousJob: previousJobId
+                  })
+                }
+              })
+            }
+          })
         })
       })
 
@@ -94,8 +97,6 @@ class SingleJob extends React.Component {
   }
 
   render() {
-    console.log(this.state.jobIndex)
-
     const {
       title,
       intro,
@@ -140,24 +141,24 @@ class SingleJob extends React.Component {
 
           <h2 className="center-text">Some of your colleagues</h2>
           <div className="single-job-image-container">
-          {this.state.employees.map(employee => (
-            <div className="colleague-container">
-              <EmployeeComponent
+            {this.state.employees.map(employee => (
+              <div className="colleague-container">
+                <EmployeeComponent
                   key={employee.id}
                   name={employee.name}
-                image={employee.pictureUrl} />
-            </div>
-          ))}
+                  image={employee.pictureUrl} />
+              </div>
+            ))}
           </div>
-            <div className="single-job-navigation-container">
+          <div className="single-job-navigation-container">
             <div className="single-job-navigation-item left-text">
-              <Link to={`/jobs/${previousJob}`} onClick={this.getJobInfo}>&#8592; Previous Post</Link>
+            {(this.state.jobIndex != 0) && <Link to={`/jobs/${previousJob}`} onClick={this.getJobInfo}>&#8592; Previous Post</Link>}
             </div>
             <div className="single-job-navigation-item">
-              <a href="#">Back to List</a>
+              <Link to="/jobs">Back to List</Link>
             </div>
             <div className="single-job-navigation-item right-text">
-              <Link to={`/jobs/${nextJob}`} onClick={this.getJobInfo}>Next Post &#8594;</Link>
+            {(this.state.jobIndex != 5) && <Link to={`/jobs/${nextJob}`} onClick={this.getJobInfo}>Next Post &#8594;</Link>}
             </div>
           </div>
         </div>

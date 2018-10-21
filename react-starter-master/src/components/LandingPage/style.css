@@ -23,16 +23,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 .job-suggestion {
   width: 30%;
 }
-
 .job-suggestions-container h2 {
   width: 100%;
   margin-bottom: 20px;
 }
-
 .job-suggestions-container h3 {
   color: var(--purple);
   margin: 3px 0;
