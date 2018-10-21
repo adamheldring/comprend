@@ -20,7 +20,7 @@ class SingleJob extends React.Component {
 
     const pathUrl = this.props.match.params.id
 
-    const jobUrl = `http://hellotechnigo.comprendwebsites.net/api/jobs/${pathUrl}`
+    const jobUrl = `https://hellotechnigo.comprendwebsites.net/api/jobs/${pathUrl}`
 
     fetch(jobUrl)
       .then(response => response.json())
@@ -30,7 +30,7 @@ class SingleJob extends React.Component {
         })
       })
 
-    const jobsUrl = "http://hellotechnigo.comprendwebsites.net/api/jobs"
+    const jobsUrl = "https://hellotechnigo.comprendwebsites.net/api/jobs"
 
     fetch(jobsUrl)
       .then(response => response.json())
@@ -62,7 +62,7 @@ class SingleJob extends React.Component {
         })
       })
 
-    const employeeUrl = "http://hellotechnigo.comprendwebsites.net/api/users"
+    const employeeUrl = "https://hellotechnigo.comprendwebsites.net/api/users"
 
     fetch(employeeUrl)
       .then(response => response.json())
