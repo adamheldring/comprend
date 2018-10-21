@@ -12,13 +12,13 @@ class EmployeePage extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    const url = "http://hellotechnigo.comprendwebsites.net/api/users"
+    const url = "https://hellotechnigo.comprendwebsites.net/api/users"
 
     fetch(url)
       .then(response => {
         return response.json()
       }).then(employees => {
-        const placeholder = "/assets/images/placeholder.png"
+        const placeholder = "./assets/images/placeholder.png"
         const removeInvalidNames = employee => (!(employee.name === "" || employee.name === null || employee.name.includes("@")))
 
         employees.forEach(employee => {

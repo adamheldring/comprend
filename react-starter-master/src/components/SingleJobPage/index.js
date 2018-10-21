@@ -68,7 +68,7 @@ class SingleJob extends React.Component {
       .then(response => response.json())
       .then(employees => {
         const removeInvalidNames = employee => (!(employee.name === "" || employee.name === null || employee.name.includes("@")))
-        const placeholder = "/assets/images/placeholder.png"
+        const placeholder = "./assets/images/placeholder.png"
 
         employees.forEach(employee => {
           if (employee.pictureUrl === "") {
@@ -116,7 +116,7 @@ class SingleJob extends React.Component {
           <Link to="/jobs">&#8592; Back to List</Link>
           <h1>{title}</h1>
           <p className="preamble"><span>{city}. </span>{intro}</p>
-          <img src={`/assets/images/${id}.jpg`} alt="" />
+          <img src={`./assets/images/${id}.jpg`} alt="" />
           <div className="single-job-button-container">
             <button className="button-apply">Apply for the job</button>
             <button className="button-share">Share the job</button>
